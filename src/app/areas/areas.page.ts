@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs'
 import { Areas } from './Models/areas.model';
+import { AreasService } from './services/areas.service';
 
 @Component({
   selector: 'app-areas',
@@ -10,15 +11,12 @@ import { Areas } from './Models/areas.model';
 export class AreasPage implements OnInit {
 
 
-  areas$: Observable<Areas[]>
+  areas$: Observable<Areas[]>;
 
-  constructor() { }
+  constructor(private areasService: AreasService) { }
 
   ngOnInit() {
-    this.areas$ = of([
-      { id: '123a', title: 'Aprender Ionic'},
-      { id: '123b', title: 'Aprender Firebase'}
-    ]);
+    this.areas$ =  this.areasService.getAll();
   }
 
 }

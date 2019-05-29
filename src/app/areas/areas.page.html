@@ -6,10 +6,17 @@
 
 <ion-content>
 
-  <ion-list>
-    <app-areas-item *ngFor="let areas of (areas$ | async)" [areas]="areas"></app-areas-item>
+  <ion-list *ngIf="areas$ | async as areas" >
+    <ng-container *ngIf="areas.length > 0; else noAreas">
+        <app-areas-item
+        *ngFor="let areas of areas"
+        [areas]="areas"
+        ></app-areas-item>
+    </ng-container>
+
+    <ng-template #noAreas> 
+      <ion-item lines="nome">Não há áreas..</ion-item>
+    </ng-template>
   </ion-list>
-
-
 
 </ion-content>
